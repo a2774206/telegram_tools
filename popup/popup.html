@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>定时发送插件</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="section">
+    <h3>添加发送任务</h3>
+
+    <label>消息内容：
+      <textarea id="message" placeholder="要发送的内容"></textarea>
+    </label>
+
+    <label>任务类型：
+      <select id="task-type">
+        <option value="daily">定时发送</option>
+        <option value="interval">定时间隔发送</option>
+      </select>
+    </label>
+
+    <div id="daily-settings">
+      <label>时间：
+        <input type="time" id="daily-time" />
+      </label>
+    </div>
+
+    <div id="interval-settings" style="display:none;">
+      <label>小时：
+        <input type="number" id="interval-hours" min="0" value="0" />
+      </label>
+      <label>分钟：
+        <input type="number" id="interval-minutes" min="0" value="0" />
+      </label>
+      <label style="display:none">秒：
+        <input type="number" id="interval-seconds" min="0" value="0" />
+      </label>
+    </div>
+
+    <label>发送对象：
+      <select id="target-type">
+        <option value="all">全部</option>
+        <option value="group">仅群组</option>
+        <option value="private">仅个人</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="section">
+    <label>名单过滤(不想发送给谁)：
+      <textarea id="filter-list" placeholder="输入联系人/群组名，回车分隔" style="display: none;"></textarea>
+    </label>
+	<!-- 优化掉折叠 -->
+    <!-- <button id="toggle-contact-list" style="margin-bottom: 10px;">显示联系人列表 ▼</button> -->
+    <div id="contact-list-container" style=" max-height: 150px; overflow-y: auto;">
+      <ul id="contact-list"></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <button id="add-task">添加任务</button>
+  </div>
+
+  <div class="section">
+    <h4>任务列表</h4>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

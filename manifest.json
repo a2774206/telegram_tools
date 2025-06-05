@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Telegram Auto Sender",
+  "version": "1.0",
+  "description": "自动发送 Telegram 消息",
+  "permissions": ["storage", "scripting", "tabs", "alarms","activeTab","tabCapture"],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+	"type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://web.telegram.org/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": ["*://web.telegram.org/*", "<all_urls>"]
+}

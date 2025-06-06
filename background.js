@@ -96,7 +96,7 @@ function batchSendMessages(message, targetType, filterList) {
         }));
       }
       clickAndSend(i + 1);
-    }, 800);
+    }, 1200);
   }
 
   clickAndSend(0);

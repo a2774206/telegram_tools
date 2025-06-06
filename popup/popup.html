@@ -47,13 +47,17 @@
     </label>
   </div>
 
+
+  
+  
   <div class="section">
-    <label>名单过滤(不想发送给谁)：
-      <textarea id="filter-list" placeholder="输入联系人/群组名，回车分隔" style="display: none;"></textarea>
-    </label>
-	<!-- 优化掉折叠 -->
-    <!-- <button id="toggle-contact-list" style="margin-bottom: 10px;">显示联系人列表 ▼</button> -->
-    <div id="contact-list-container" style=" max-height: 150px; overflow-y: auto;">
+    <label>名单过滤(不想发送给谁)： <span id="contact-count" style="margin-left: 10px; "></span></label>
+    <div style="margin-bottom: 10px;">
+      <button id="refresh-contacts">刷新联系人列表</button>
+     
+    </div>
+    <textarea id="filter-list" placeholder="输入联系人/群组名，回车分隔" style="display: none;"></textarea>
+    <div id="contact-list-container" style=" max-height: 550px; overflow-y: auto;">
       <ul id="contact-list"></ul>
     </div>
   </div>

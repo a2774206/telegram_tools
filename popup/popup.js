@@ -29,6 +29,9 @@ function bindEvents() {
   //     btn.textContent = '展示联系人列表 ▼';
   //   }
   // });
+  document.getElementById('refresh-contacts').addEventListener('click', () => {
+    loadContacts();
+  });
 }
 
 function addTask() {
@@ -80,9 +83,11 @@ function renderTasks() {
       <div><strong>[${task.type === 'daily' ? '定时' : '间隔'}]</strong> ${timeDesc}</div>
       <div>发送对象：${task.target === 'all' ? '全部' : task.target === 'group' ? '群组' : '个人'}</div>
       <div>消息内容：${task.message}</div>
-      <div>过滤名单：${filters}</div>
+      
       <button class="delete-btn" data-index="${index}">删除</button>
     `;
+	// <div>过滤名单：${filters}</div>
+	li.title = "过滤名单：" + filters
     taskList.appendChild(li);
   });
 
@@ -129,6 +134,8 @@ function renderContacts(contacts) {
   const ul = document.getElementById('contact-list');
   ul.innerHTML = '';
   const filterListTextarea = document.getElementById('filter-list');
+  // 显示总人数
+  document.getElementById('contact-count').textContent = `当前检测到共 ${contacts.length} 个`;
 
   contacts.forEach(({ name, type }) => {
     const li = document.createElement('li');
@@ -159,8 +166,8 @@ function renderContacts(contacts) {
     const label = document.createElement('label');
     label.style.userSelect = 'none';
     label.appendChild(checkbox);
-    label.append(` ${name} (${type === 'group' ? '群组' : '个人'})`);
-
+    label.append(` ${name}`);
+	label.title = ` ${name} (${type === 'group' ? '群组' : '个人'})`;
     li.appendChild(label);
     ul.appendChild(li);
   });

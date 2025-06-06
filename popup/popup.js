@@ -29,9 +29,31 @@ function bindEvents() {
   //     btn.textContent = '展示联系人列表 ▼';
   //   }
   // });
+  
+  
   document.getElementById('refresh-contacts').addEventListener('click', () => {
-    loadContacts();
+	  
+    // 注入滚动脚本到 Telegram 网页中
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: () => {
+          const messageList = document.querySelector('.chat-list');
+          if (messageList) {
+            messageList.scrollTop = messageList.scrollHeight;
+          } else {
+            console.log('未找到 .chatlist 元素');
+          }
+        }
+      }, () => {
+        // 等待页面加载联系人，然后执行 popup.js 中的 loadContacts
+        setTimeout(() => {
+          loadContacts(); // 仍然在 popup.js 中执行
+        }, 500);
+      });
+    });
   });
+
 }
 
 function addTask() {
